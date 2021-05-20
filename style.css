@@ -35,6 +35,7 @@ body{
     font-family: monospace;
     line-height: 70px;
     background-color: ivory;
+    word-wrap: break-word;
 }
 
 .buttons{
@@ -51,7 +52,7 @@ body{
     background-color: lightcoral;
 }
 
-.operator{
+.operator, .equal, .point{
     background-color: teal;
 }
 
