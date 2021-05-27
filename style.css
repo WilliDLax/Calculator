@@ -1,5 +1,5 @@
 body{
-    background-color: ivory;
+    background-color: lightgrey;
 }
 
 .calculator-body{
@@ -11,7 +11,7 @@ body{
     top: 25px;
     border: 3px solid black;
     border-radius: 20px;
-    width: 20vw;
+    width: 270px;
     height: 500px;
     padding: 10px;
     background-color: grey;

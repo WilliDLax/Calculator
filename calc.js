@@ -50,17 +50,21 @@ numbers.forEach(number => {
 let operators = document.querySelectorAll(".operator");
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
-        if(display.textContent[display.textContent.length-1] == operator.textContent) return;
-        if(firstNumber){
+        if(isNaN(parseInt(display.textContent[display.textContent.length-1]))){
+            return;
+        }
+        else if(firstNumber){
             secondNumber = Number(display.textContent.slice((display.textContent.indexOf(sign)+1)));
             let temp = operate(sign, firstNumber, secondNumber);
             firstNumber = temp;
             sign = operator.textContent;
-            display.textContent = firstNumber;
+            display.textContent = firstNumber + sign;
         }
-        firstNumber = Number(display.textContent);
-        sign = operator.textContent;
-        display.textContent += sign;
+        else{
+            firstNumber = Number(display.textContent);
+            sign = operator.textContent;
+            display.textContent += sign;
+        }
     });
 });
 
@@ -72,16 +76,24 @@ dot.addEventListener("click", () => {
 
 let equal = document.querySelector(".equal");
 equal.addEventListener("click", () => {
-    if(!firstNumber || !sign) return;
-    secondNumber = Number(display.textContent.slice((display.textContent.indexOf(sign)+1)));
-    answer = operate(sign, firstNumber, secondNumber);
-    display.textContent = answer;
-    firstNumber = undefined;
+    if((firstNumber || firstNumber == "0") && sign){
+        if(display.textContent.slice((display.textContent.indexOf(sign)+1))){
+            secondNumber = Number(display.textContent.slice((display.textContent.indexOf(sign)+1)));
+            answer = operate(sign, firstNumber, secondNumber);
+            if(answer == Infinity){
+                display.textContent = "You be mumu";
+            }else{
+                display.textContent = Math.round(answer * 1000)/1000;
+            }
+            firstNumber = undefined;
+        }
+        else return;
+    }
 });
 
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", () => {
-    display.textContent = "0";
+    display.textContent = "";
     firstNumber = undefined;
     secondNumber = undefined;
     sign = undefined;
