@@ -70,8 +70,16 @@ operators.forEach(operator => {
 
 let dot = document.querySelector(".point");
 dot.addEventListener("click", () => {
-    if(display.textContent.includes(dot.textContent)) return;
-    display.textContent += dot.textContent;
+    if(display.textContent.includes(dot.textContent)){
+        if(sign){
+            if((display.textContent.slice((display.textContent.indexOf(sign)+1))).includes(dot.textContent)){
+                return;
+            }
+            else{display.textContent += dot.textContent;}
+        }
+        else{return;}
+    }
+    else{display.textContent += dot.textContent;}
 });
 
 let equal = document.querySelector(".equal");
@@ -104,7 +112,7 @@ const del = document.querySelector("#delete");
 del.addEventListener("click", () => {
     display.textContent = display.textContent.replace(display.textContent[display.textContent.length-1],"");
     if(display.textContent == ""){
-        display.textContent = "0";
+        display.textContent = "";
     }
 });
 
